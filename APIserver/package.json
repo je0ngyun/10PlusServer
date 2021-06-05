@@ -1,0 +1,30 @@
+{
+  "name": "apiserver",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "supervisor ./bin/www"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-async-handler": "^1.1.4",
+    "http-errors": "~1.6.3",
+    "ip": "^1.1.5",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.95.4",
+    "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
+    "public-ip": "^4.0.3",
+    "randomstring": "^1.1.5",
+    "request-ip": "^2.1.3",
+    "socket.io": "^4.0.1",
+    "supervisor": "^0.12.0"
+  }
+}
