@@ -1,7 +1,5 @@
 'use strict';
 //MQTT 브로커
-const env = require('./env/env.json');
-const db = require('./dbmodel');
 const aedes = require('aedes')();
 const server = require('net').createServer(aedes.handle);
 const port = 1883;

@@ -6,6 +6,7 @@ const db = require('../common_modules/dbmodel');
 const reqToMac = require('../common_modules/reqToMac');
 const isEmpty = require('is-empty');
 const { verifyToken } = require('./vertifyToken');
+const mqttClient = require('../common_modules/mqttClient');
 
 //등록기기조회
 router.get(
@@ -139,31 +140,78 @@ router.get(
   }),
 );
 
-//기기동작요청
+// //기기동작요청
+// router.get(
+//   '/action',
+//   verifyToken,
+//   asyncHandler(async (req, res, next) => {
+//     const name = await db.getDeviceName(req.query);
+//     const host = req.query.host;
+//     try {
+//       const macRes = await reqToMac.req(host, 80, 'action', req.query);
+//       if (macRes.data != 'disconnect') {
+//         req.query.name = name;
+//         //await db.setDeviceLog(req.query, macRes.data.states);
+//         res.status(200).json({
+//           success: true,
+//           device: macRes.data,
+//         });
+//       } else {
+//         res.status(200).json({
+//           success: false,
+//           device: macRes.data,
+//         });
+//       }
+//     } catch (ex) {
+//       console.log(ex);
+//     }
+//   }),
+// );
+
+//기기동작요청 (MQTT TEST)
 router.get(
   '/action',
   verifyToken,
   asyncHandler(async (req, res, next) => {
-    const name = await db.getDeviceName(req.query);
+    const client = mqttClient.getClientRef();
+    const stateTopic = 'state';
     const host = req.query.host;
-    try {
-      const macRes = await reqToMac.req(host, 80, 'action', req.query);
-      if (macRes.data != 'disconnect') {
-        req.query.name = name;
-        //await db.setDeviceLog(req.query, macRes.data.states);
-        res.status(200).json({
-          success: true,
-          device: macRes.data,
-        });
-      } else {
-        res.status(200).json({
-          success: false,
-          device: macRes.data,
-        });
+    let currentState;
+    client.once('message', async function (topic, message) {
+      if (topic === stateTopic) {
+        console.log('들어가짐');
+        //상태처리 토픽
+        let info = JSON.parse(message);
+        let computed = { host: '', name: '', state: '' };
+        computed.host = info.device_host;
+        computed.name = await db.getDeviceName({ host: info.device_host + '' });
+        //DB에 문자열로 저장하기 위해 2진수를 평문으로 변환
+        for (let i = 0; i < info.device_state.length; i++) {
+          if (Number(info.device_state[i]) === 0) {
+            computed.state += 'false,';
+          } else {
+            computed.state += 'true,';
+          }
+        }
+        computed.state = computed.state.slice(0, computed.state.length - 1);
+        await db.setDeviceLog(computed);
+
+        //평문 상태값을 배열 상태값으로 변환
+        stateStr = computed.state;
+        currentState = stateStr.split(',');
+        for (let i = 0; i < currentState.length; i++) {
+          if (currentState[i] == 'true') {
+            currentState[i] = true;
+          } else {
+            currentState[i] = false;
+          }
+        }
+        res
+          .status(200)
+          .json({ success: true, device: { states: currentState } });
       }
-    } catch (ex) {
-      console.log(ex);
-    }
+    });
+    client.publish(`${host}/action`, req.query.switch);
   }),
 );
 

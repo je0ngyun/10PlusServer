@@ -23,12 +23,12 @@ self.setDevice = async function (info) {
     .then();
 };
 
-self.setDeviceLog = async function (info, state) {
+self.setDeviceLog = async function (info) {
   await db('device_log')
     .insert({
       device_host: info.host,
       device_name: info.name,
-      state: `${state}`,
+      state: info.state,
       api_serial: env.serial,
     })
     .then();
