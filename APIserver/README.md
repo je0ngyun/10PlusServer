@@ -100,7 +100,7 @@
 
 <img src = "https://github.com/ye0reum/ye0reum.github.io/blob/master/src/images/project-imgs/10plus-server/REST.png?raw=true" width="80%">
 
-### 기기등록
+### **기기등록**
 
 기기등록은 다음과 같은 단계를 거칩니다.
 
@@ -117,7 +117,7 @@ action : subscribe
 message : 기기호스트,기기이름,기기전원갯수(구)
 ```
 
-### 기기동작요청
+### **기기동작요청**
 
 기기동작은 다음과 같은 단계를 거칩니다.
 
@@ -148,13 +148,15 @@ request-query : host,switch
 response-body : success(boolean),device(object)
 ```
 
-### 기기로그관리
+### **기기로그관리**
 
 중계서버는 각 **기기상태가 변화할때마다** 다음과 같은 DB테이블에 상태를 저장합니다.
 
 <img src = "https://github.com/ye0reum/ye0reum.github.io/blob/master/src/images/project-imgs/10plus-server/DB%ED%85%8C%EC%9D%B4%EB%B8%94.png?raw=true" width="80%">
 
-### 사용자인증
+DB 쿼리실행을 위해 쿼리빌더(Knex 라이브러리)를 사용하였습니다.
+
+### **사용자인증**
 
 사용자 인증방식은 **토큰기반 인증방식** 을 채택하였으며 **JsonWebToken** 을 사용하였습니다.
 사용자 토큰 발급 은 다음과 같은 단계를 거칩니다.
