@@ -3,7 +3,6 @@ var router = express.Router();
 const asyncHandler = require('express-async-handler');
 const createError = require('http-errors');
 const db = require('../common_modules/dbmodel');
-const reqToMac = require('../common_modules/reqToMac');
 const isEmpty = require('is-empty');
 const { verifyToken } = require('./vertifyToken');
 const mqttClient = require('../common_modules/mqttClient');
@@ -152,7 +151,7 @@ router.get(
     let currentState = '';
     client.once('message', async function (topic, message) {
       if (topic === stateTopic) {
-        //구독에 대한 응답으로 JSON이 옴
+        //2.구독에 대한 응답으로 JSON이 옴
         let info = JSON.parse(message);
 
         //splice 를 위해 2진수를 평문에 , 문자 추가
@@ -176,12 +175,14 @@ router.get(
             currentState[i] = false;
           }
         }
-        //웹 요청 응답
+
+        //3.웹 요청 응답
         res
           .status(200)
           .json({ success: true, device: { states: currentState } });
       }
     });
+    //1.웹 요청 정보로 발행
     client.publish(`${host}/action`, switchNum);
   }),
 );

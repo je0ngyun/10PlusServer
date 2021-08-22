@@ -30,6 +30,7 @@ const response = function (reqHost, msg) {
   let client = dgram.createSocket('udp4');
   client.send(message, 0, message.length, PORT, HOST, function (err, bytes) {
     if (err) throw err;
+    console.log(`udp send to ${HOST} message : ${message}`);
     client.close();
   });
 };
