@@ -17,7 +17,7 @@
 
 시스템 구성도는 다음 사진과 같습니다.
 
-<img width="100%" alt="system" src="https://user-images.githubusercontent.com/33706043/130343583-30e0b663-9a81-4a5f-a311-4a678833899a.png">
+<img width="80%" alt="system" src="https://user-images.githubusercontent.com/33706043/130343583-30e0b663-9a81-4a5f-a311-4a678833899a.png">
 
 중앙 API 서버 가 각 사용자의 중계서버에 요청을 하고 각 중계서버는 사용자의 요청에 맞게 내부망에 연결된 IOT 기기 들을 작동시키게 됩니다.
 **API 서버에서 중계서버로의 요청은 HTTP** 요청을 사용하고 **중계서버에서 각 IOT 기기로의 요청은 MQTT** 프로토콜을 사용합니다.
@@ -98,7 +98,7 @@
 
 아래 사진은 API Document 입니다.
 
-<img src = "https://github.com/ye0reum/ye0reum.github.io/blob/master/src/images/project-imgs/10plus-server/REST.png?raw=true" width="100%">
+<img src = "https://github.com/ye0reum/ye0reum.github.io/blob/master/src/images/project-imgs/10plus-server/REST.png?raw=true" width="80%">
 
 ### 기기등록
 
@@ -152,7 +152,7 @@ response-body : success(boolean),device(object)
 
 중계서버는 각 **기기상태가 변화할때마다** 다음과 같은 DB테이블에 상태를 저장합니다.
 
-<img src = "https://github.com/ye0reum/ye0reum.github.io/blob/master/src/images/project-imgs/10plus-server/DB%ED%85%8C%EC%9D%B4%EB%B8%94.png?raw=true" width="100%">
+<img src = "https://github.com/ye0reum/ye0reum.github.io/blob/master/src/images/project-imgs/10plus-server/DB%ED%85%8C%EC%9D%B4%EB%B8%94.png?raw=true" width="80%">
 
 ### 사용자인증
 
@@ -173,7 +173,7 @@ response-body : success(boolean),device(object)
 
 아래 페이지의 이미지는 위의 단계를 나타낸 것 입니다.</br>
 
-<img src = "https://github.com/ye0reum/ye0reum.github.io/blob/master/src/images/project-imgs/10plus-server/%EC%9D%B8%EC%A6%9D.png?raw=true" width="100%">
+<img src = "https://github.com/ye0reum/ye0reum.github.io/blob/master/src/images/project-imgs/10plus-server/%EC%9D%B8%EC%A6%9D.png?raw=true" width="80%">
 
 ## 회고
 
