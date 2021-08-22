@@ -154,7 +154,7 @@ response-body : success(boolean),device(object)
 
 <img src = "https://github.com/ye0reum/ye0reum.github.io/blob/master/src/images/project-imgs/10plus-server/DB%ED%85%8C%EC%9D%B4%EB%B8%94.png?raw=true" width="80%">
 
-DB 쿼리실행을 위해 쿼리빌더(Knex 라이브러리)를 사용하였습니다.
+DB 쿼리실행을 위해 쿼리빌더(Knex 라이브러리)를 이용하였습니다.
 
 ### **사용자인증**
 
