@@ -51,8 +51,6 @@ app.use((err, req, res, next) => {
 
 //최종 에러핸들러
 app.use(function (err, req, res, next) {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
   //에러응답
   res.status(err.status || 500);
   res.json({ error: err, success: false });
